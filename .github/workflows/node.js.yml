@@ -16,7 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest,windows-latest, macOS-latest]
+        os: [ubuntu-latest]
+#        os: [ubuntu-latest,windows-latest, macOS-latest]
         node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -31,5 +32,19 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - run: npm run build
-
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+          name: dist-without-markdown
+          path: |
+    - name: Docker build and pushlish to AWS S3 bucket
+      uses: medlypharmacy/s3-artifacts-action@master
+      with:
+        aws_access_key_id: ${{ secrets.S3_BUILD_ARTIFACTS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.S3_BUILD_ARTIFACTS_SECRET_ACCESS_KEY }}
+        aws_s3_bucket_name: ${{ secrets.S3_BUCKET_NAME }}
+        source_path: './build'
+        destination_path: "/artefacts-folder"
+        exclude_repo_from_destination_path: true
+        resource_type: "DIRECTORY"
 
