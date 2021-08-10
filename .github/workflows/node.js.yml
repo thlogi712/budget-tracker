@@ -36,6 +36,6 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.S3_BUILD_ARTIFACTS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_BUILD_ARTIFACTS_SECRET_ACCESS_KEY }}
         AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
-        AWS_REGION: us-central-1 # optional: defaults to us-east-1
-        SOURCE_DIR: build #
+        AWS_REGION: 'us-central-1' # optional: defaults to us-east-1
+        SOURCE_DIR: 'build' #
 
