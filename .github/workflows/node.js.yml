@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ${{matrix.os}}
-
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -38,4 +37,3 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'eu-central-1'
         SOURCE_DIR: 'build'
-
